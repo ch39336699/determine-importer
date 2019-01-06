@@ -12,7 +12,7 @@
 	<groupId>com.fedex</groupId>
 	<artifactId>determine-importer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>determine-importerl</name>
+	<name>determine-importer</name>
 	<description>Determine Importer</description>
 
 	<properties>
