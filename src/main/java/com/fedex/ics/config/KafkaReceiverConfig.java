@@ -30,7 +30,7 @@ import com.fedex.ics.worker.DetermineImporterWorker;
 public class KafkaReceiverConfig {
   private static final Log logger = LogFactory.getLog(KafkaReceiverConfig.class);
     
-  @Value("localhost:9092")
+  @Value("c0002666.test.cloud.fedex.com:9092")
   private String bootstrapServers;
   
   @Autowired
@@ -73,10 +73,9 @@ public class KafkaReceiverConfig {
                      // @Header(KafkaHeaders.RECEIVED_TIMESTAMP) Long timestamp,
                       ) {
     String[] values = payload.split(":");
-    logger.info("Determine Importer Recieved: " + values[0] + " appID: " + appID + " Shipment: " + values[1]);
     if(appID.contains("1002"))
     {
-      logger.info("Determine Importer Processing... " + values[1]);
+      logger.info("Determine Importer Processing... TaskID:" + values[0]  + " OID:" + values[1]);
       worker.doWork(values[0], appID, values[1]);
     }
   }
