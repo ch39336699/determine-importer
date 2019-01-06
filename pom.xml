@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.fedex</groupId>
-	<artifactId>calculate-time-of-arrival</artifactId>
+	<artifactId>determine-importer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>calculate-time-of-arrival</name>
-	<description>Calculate Time Of Arrival</description>
+	<name>determine-importerl</name>
+	<description>Determine Importer</description>
 
 	<properties>
 		<java.version>1.8</java.version>

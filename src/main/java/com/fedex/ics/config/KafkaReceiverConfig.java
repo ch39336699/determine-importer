@@ -23,7 +23,7 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fedex.ics.worker.CalculateTimeOfArrivalWorker;
+import com.fedex.ics.worker.DetermineImporterWorker;
 
 @Configuration
 @EnableKafka
@@ -34,7 +34,7 @@ public class KafkaReceiverConfig {
   private String bootstrapServers;
   
   @Autowired
-  private CalculateTimeOfArrivalWorker worker;
+  private DetermineImporterWorker worker;
   
 
   @Bean
@@ -43,7 +43,7 @@ public class KafkaReceiverConfig {
       props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
       props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
       props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-      props.put(ConsumerConfig.GROUP_ID_CONFIG, "timeOfArrival");
+      props.put(ConsumerConfig.GROUP_ID_CONFIG, "determineImporter");
       props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
       return props;
   }
@@ -73,10 +73,10 @@ public class KafkaReceiverConfig {
                      // @Header(KafkaHeaders.RECEIVED_TIMESTAMP) Long timestamp,
                       ) {
     String[] values = payload.split(":");
-    logger.info("CalculateTimeOfArrival Recieved: " + values[0] + " appID: " + appID + " Shipment: " + values[1]);
+    logger.info("Determine Importer Recieved: " + values[0] + " appID: " + appID + " Shipment: " + values[1]);
     if(appID.contains("1002"))
     {
-      logger.info("CalculateTimeOfArrival Processing... " + values[1]);
+      logger.info("Determine Importer Processing... " + values[1]);
       worker.doWork(values[0], appID, values[1]);
     }
   }
